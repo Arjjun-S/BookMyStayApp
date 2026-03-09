@@ -42,7 +42,7 @@ class BookingRequestQueue {
         return bookingQueue;
     }
 }
-public class UseCase5BookingRequestQueue {
+public class BookMyStayApp {
     public static void main(String[] args) {
         System.out.println("Welcome User");
         System.out.println("Book My Stay App");
