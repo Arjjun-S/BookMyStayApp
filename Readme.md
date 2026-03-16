@@ -1,2 +1,2 @@
 # Book My Stay App
-UC2:Basic Room Types & Static Availability
+UC3: Centralized Room Inventory Management
