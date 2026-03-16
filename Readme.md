@@ -1,2 +1,2 @@
 # Book My Stay App
-UC:1 Application Entry And Welcome Message
+Use Case 10: Booking Cancellation & Inventory Rollback
