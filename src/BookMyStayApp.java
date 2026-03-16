@@ -1,64 +1,108 @@
 import java.util.*;
-public abstract class Room{
+abstract class Room {
     protected int numberOfBeds;
     protected int squareFeet;
     protected double pricePerNight;
-    Room(int numberOfBeds,int squareFeet,double pricePerNight){
-        this.numberOfBeds=numberOfBeds;
-        this.squareFeet=squareFeet;
-        this.pricePerNight=pricePerNight;
+    Room(int numberOfBeds, int squareFeet, double pricePerNight) {
+        this.numberOfBeds = numberOfBeds;
+        this.squareFeet = squareFeet;
+        this.pricePerNight = pricePerNight;
     }
-    public void displayRoomDetails(){
-        System.out.println("Beds:"+numberOfBeds);
-        System.out.println("Size:"+squareFeet+"sqft");
-        System.out.println("Price Per Night:"+pricePerNight);
+    public void displayRoomDetails() {
+        System.out.println("Beds: " + numberOfBeds);
+        System.out.println("Size: " + squareFeet + " sqft");
+        System.out.println("Price Per Night: " + pricePerNight);
     }
 }
-public class singleRoom extends Room{
-    int available;
-    singleRoom(int available){
-        this.available=available;
-        super(1,250,1500);
+class SingleRoom extends Room {
+
+    SingleRoom() {
+        super(1, 250, 1500.0);
     }
-    public void displayRoomDetails(){
+
+    @Override
+    public void displayRoomDetails() {
         System.out.println("Single Room:");
         super.displayRoomDetails();
-        System.out.println("Available:"+available+"\n");
     }
 }
-public class doubleRoom extends Room{
-    int available;
-    doubleRoom(int available){
-        this.available=available;
-        super(2,400,2500);
+class DoubleRoom extends Room {
+
+    DoubleRoom() {
+        super(2, 400, 2500.0);
     }
-    public void displayRoomDetails(){
+
+    @Override
+    public void displayRoomDetails() {
         System.out.println("Double Room:");
         super.displayRoomDetails();
-        System.out.println("Available:"+available+"\n");
     }
 }
-public class suiteRoom extends Room{
-    int available;
-    suiteRoom(int available){
-        this.available=available;
-        super(3,750,5000);
+class SuiteRoom extends Room {
+
+    SuiteRoom() {
+        super(3, 750, 5000.0);
     }
-    public void displayRoomDetails(){
+    @Override
+    public void displayRoomDetails() {
         System.out.println("Suite Room:");
         super.displayRoomDetails();
-        System.out.println("Available:"+available+"\n");
     }
 }
-void main() {
-    System.out.println("Welcome user");
-    System.out.println("Book My Stay App");
-    System.out.println("Version:2.1");
-    System.out.println("Hotel Room Initialization\n");
-    singleRoom s=new singleRoom(5);
-    doubleRoom d=new doubleRoom(3);
-    suiteRoom p=new suiteRoom(2);
-    s.displayRoomDetails();
-    d.displayRoomDetails();
-    p.displayRoomDetails();
+class RoomInventory {
+
+    private Map<String, Integer> roomAvailability;
+    public RoomInventory() {
+        roomAvailability = new HashMap<>();
+    }
+    public void initializeInventory() {
+        roomAvailability.put("Single", 5);
+        roomAvailability.put("Double", 3);
+        roomAvailability.put("Suite", 2);
+    }
+    public Map<String, Integer> getRoomAvailability() {
+        return roomAvailability;
+    }
+}
+class RoomSearchService {
+    private RoomInventory inventory;
+    RoomSearchService(RoomInventory inventory) {
+        this.inventory = inventory;
+    }
+    public void searchAvailableRooms() {
+
+        Map<String, Integer> availability = inventory.getRoomAvailability();
+        for (Map.Entry<String, Integer> entry : availability.entrySet()) {
+            String type = entry.getKey();
+            int count = entry.getValue();
+
+            if (count > 0) {
+                Room room = null;
+                if (type.equals("Single"))
+                    room = new SingleRoom();
+                else if (type.equals("Double"))
+                    room = new DoubleRoom();
+                else if (type.equals("Suite"))
+                    room = new SuiteRoom();
+                if (room != null) {
+                    room.displayRoomDetails();
+                    System.out.println("Available Rooms: " + count);
+                    System.out.println();
+                }
+            }
+        }
+    }
+}
+public class BookMyStayApp {
+
+    public static void main(String[] args) {
+        System.out.println("Welcome User");
+        System.out.println("Book My Stay App");
+        System.out.println("Version: 4.0");
+        System.out.println("Room Search System");
+        RoomInventory inventory = new RoomInventory();
+        inventory.initializeInventory();
+        RoomSearchService searchService = new RoomSearchService(inventory);
+        searchService.searchAvailableRooms();
+    }
 }
