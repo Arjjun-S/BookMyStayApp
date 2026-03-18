@@ -1,2 +1,3 @@
 # Book My Stay App
-UC5: Room Search & Availability Check
+
+UC6: Reservation Confirmation & Room Allocation
