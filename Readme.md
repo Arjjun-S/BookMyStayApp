@@ -1,3 +1,2 @@
 # Book My Stay App
-
-UC6: Reservation Confirmation & Room Allocation
+Use Case 7: Add-On Service Selection
