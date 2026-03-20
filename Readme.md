@@ -1,2 +1,2 @@
 # Book My Stay App
-Use Case 8: Booking History & Reporting
+Use Case 9: Error Handling & Validation
