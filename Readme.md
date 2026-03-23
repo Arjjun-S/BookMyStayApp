@@ -1,2 +1,2 @@
 # Book My Stay App
-Use Case 10: Booking Cancellation & Inventory Rollback
+Use Case 11: Concurrent Booking Simulation
